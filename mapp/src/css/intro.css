@@ -1,0 +1,53 @@
+.Main{
+    background-color: #CCE831;
+    height:1000px;
+}
+
+.Cross{
+    
+    text-align: left;
+    padding-left: 200;
+    margin-top: 25px;
+    margin-left: 1200px;
+    font-size: 100px;
+    text-align: right;
+    color: #5E635C;
+    filter: drop-shadow(2px 2px 2px #383838);
+}
+.CrossDiv{
+    height:70px;
+    width:auto;
+}
+.LogoDiv{
+    height:250px;
+    width:auto;
+    text-align: center;
+    align-items: center;
+    padding: auto;
+}
+.OptionDiv{
+    height:200px;
+    width:auto;
+    text-align: center;
+    padding-left: 435px;
+}
+.Logo{
+    height:250px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    filter: drop-shadow(2px 2px 15px #5E635C);
+}
+.Option{
+    height: 200px;
+    width: 200px;
+    padding:20px;
+}
+.Options{
+    float:left;
+    filter: drop-shadow(2px 2px #383838);
+}
+.Line{
+    height:200px;
+    padding:20px;
+}

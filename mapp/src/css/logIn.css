@@ -1,0 +1,56 @@
+.Main{
+    width:50%;
+    height:650px;
+    float:left;
+    text-align: center;
+}
+.Left{
+    background-color: #CCE831;
+}
+.Right{
+    background-color: #F4F3F3;
+    text-align: center;
+    align-items: center;
+    
+}
+.Logo{
+    height:250px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    filter: drop-shadow(2px 2px 15px #5E635C);
+    margin-top: 100px;
+}
+.Head{
+    text-align: left;
+    font-size: 50px;
+    margin-left: 140px;
+    margin-top: -20px;
+    color:#383838;
+}
+.Inside{
+    height:400px;
+    width:50%;
+    text-align: center;
+    background-color: #FEFEFE;
+    margin-left: 25%;
+    margin-top: 20%;
+    padding:5%;
+    padding-top: 15%;
+    filter: drop-shadow(5px 5px 25px #383838);
+}
+.Input{
+    width: 100px;
+}
+.Choice{
+    font-size: 15px;
+    margin-top: 20px;
+}
+.Text{
+    text-align: left;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: -40px;
+    color:#5E635C;
+}
