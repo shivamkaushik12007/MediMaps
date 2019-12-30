@@ -6,25 +6,26 @@ import Logo from '../images/logo.svg';
 import Login from '../images/login.svg';
 import Signup from '../images/signup.svg';
 import Line from '../images/line.svg';
+
 class Intro extends Component{
     render(){
         return(
-            <div className="Main">
+            <div className="MainOne">
                 <div className="CrossDiv">
                     <Link to='/home'><i className="fa fa-times Cross" ></i></Link>
                 </div>
                 <div className="LogoDiv">
-                    <Link to='/home'><img src={Logo} className="Logo"/></Link>
+                    <Link to='/home'><img src={Logo} alt="logo" className="LogoOne"/></Link>
                 </div>
                 <div className="OptionDiv">
                     <div>
-                        <Link to='/logIn'><img src={Login} className="Option Options" /></Link>
+                        <Link to='/logIn'><img src={Login} alt="login" className="Option Options" /></Link>
                     </div>
                     <div>
-                        <img src={Line} className="Line Options"/>
+                        <img src={Line} alt="line" className="Line Options"/>
                     </div>
                     <div>
-                        <Link to='/signUp'><img src={Signup} className="Option Options"/></Link>
+                        <Link to='/signUp'><img src={Signup} alt="signup" className="Option Options"/></Link>
                     </div>
                 </div>
             </div>
