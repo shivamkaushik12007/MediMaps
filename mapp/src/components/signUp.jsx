@@ -3,16 +3,37 @@ import {Redirect} from 'react-router-dom';
 import Logo from '../images/logo.svg';
 import '../css/signUp.css';
 import {Link} from 'react-router-dom';
+import { geolocated } from "react-geolocated";
 
 class SignUp extends Component{
+    constructor(){
+        super();
+        this.state={
+            redirectToListHome: false
+        }
+    }
+    // componentDidMount(){
+    //     console.log(this.props.coords.longitude)
+    // }
+    // async componentDidMount(){
+    //     const response=await fetch("https://api.ipgeolocation.io/ipgeo?apiKey=b03590ce4cee4f55a4a020c91b36b151");
+    //     const data=await response.json();
+    //     this.setState({longitude:data.longitude,latitude:data.latitude});
+    //     console.log(data.latitude+" yesn "+data.longitude);
+    // }
     render(){
+
+        if(this.state.redirectToListHome){
+            return <div/>
+        }
+
         return(
             <div className="MainTwo">
                 <div>
                     <Link to='/home'><img src={Logo} alt='logo' className="LogoTwo"/></Link>
                 </div>
                 <div className="InsideTwo">
-                    <form>
+                    <form onSubmit={this._addUser}>
                         <div className="form">
                             <div className="form-group">
                                 <input type="text" ref="userName" placeholder="Username" className="form-control"></input>
@@ -41,6 +62,41 @@ class SignUp extends Component{
             </div>
         )
     }
+    _addUser=(event)=>{
+        event.preventDefault();
+        let user={
+            userName:this.refs.userName.value,
+            password:this.refs.password.value,
+            name:this.refs.name.value,
+            email:this.refs.email.value,
+            address:this.refs.address.value,
+            longitude:this.props.coords.longitude,
+            latitude:this.props.coords.latitude
+        }
+        console.log(user.longitude+'  '+user.latitude);
+        // fetch("",{
+        //     method: 'POST',
+        //     headers:{
+        //         'content-Type': 'application/json'
+        //     },
+        //     body:JSON.stringify(user)
+        // })
+        //     .then(res=>{
+        //         if(res.ok) return res.json
+        //     })
+        //     .then(res =>{
+        //         this.setState({redirectToListHome: true});
+        //     })
+        //     .catch(err=>{
+        //         console.log(err);
+        //     })
+    }
 }
 
-export default SignUp;
+// export default SignUp;
+export default geolocated({
+    positionOptions: {
+        enableHighAccuracy: true,
+    },
+    userDecisionTimeout: 5000,
+})(SignUp);
