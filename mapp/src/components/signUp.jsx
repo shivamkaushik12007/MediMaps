@@ -48,6 +48,9 @@ class SignUp extends Component{
                                 <input type="email" ref="email" placeholder="E-mail" className="form-control"></input>
                             </div>
                             <div className="form-group">
+                                <input type="number" ref="phone" placeholder="Mobile Number" className="form-control"></input>
+                            </div>
+                            <div className="form-group">
                                 <input type="text" ref="address" placeholder="Address" className="form-control"></input>
                             </div>
                             <button type="submit" className="btn btn-success">SignUp</button>
@@ -69,6 +72,7 @@ class SignUp extends Component{
             password:this.refs.password.value,
             name:this.refs.name.value,
             email:this.refs.email.value,
+            phone:this.refs.phone.value,
             address:this.refs.address.value,
             longitude:this.props.coords.longitude,
             latitude:this.props.coords.latitude

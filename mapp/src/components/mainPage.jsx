@@ -3,6 +3,7 @@ import Intro from './intro'
 import SignUp from './signUp'
 import LogIn from './logIn'
 import Home from './home'
+import PharmaList from './pharmaList'
 import { BrowserRouter as Router, Route, Switch, BrowserRouter} from 'react-router-dom';
 
 class MainPage extends Component{
@@ -22,6 +23,7 @@ class MainPage extends Component{
                             <Route path="/home" component={Home}/>
                             <Route path="/logIn" component={LogIn}/>
                             <Route path="/signUp" component={SignUp}/>
+                            <Route path="/pharamaList" component={PharmaList}/>
                             <Route component={Error}/>
                         </Switch>
                     </div> 

@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import '../../node_modules/font-awesome/css/font-awesome.css'
 import '../css/intro.css'
 import Logo from '../images/logo.svg';
-import Login from '../images/login.svg';
-import Signup from '../images/signup.svg';
+import Login from '../images/logIn1.svg';
+import Signup from '../images/signUp1.svg';
 import Line from '../images/line.svg';
 
 class Intro extends Component{
