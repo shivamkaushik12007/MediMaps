@@ -23,7 +23,7 @@ class MainPage extends Component{
                             <Route path="/home" component={Home}/>
                             <Route path="/logIn" component={LogIn}/>
                             <Route path="/signUp" component={SignUp}/>
-                            <Route path="/pharamaList" component={PharmaList}/>
+                            <Route path="/pharmaList" component={PharmaList}/>
                             <Route component={Error}/>
                         </Switch>
                     </div> 
