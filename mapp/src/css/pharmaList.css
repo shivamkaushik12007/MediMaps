@@ -1,0 +1,17 @@
+.LogoList{
+    height:100px;
+    width: 300px;
+    filter: drop-shadow(2px 2px 5px #5E635C);
+}
+.LogoName{
+    text-align: center;
+}
+.Coloumn{
+    width: 25%;
+}
+.TableData{
+    text-align: left;
+}
+.TableDiv{
+    margin-top: 20px;
+}

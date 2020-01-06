@@ -24,7 +24,7 @@ class SignUp extends Component{
     render(){
 
         if(this.state.redirectToListHome){
-            return <div/>
+            return <Redirect to="/mediList"/>
         }
 
         return(
@@ -97,10 +97,9 @@ class SignUp extends Component{
     }
 }
 
-// export default SignUp;
 export default geolocated({
     positionOptions: {
         enableHighAccuracy: true,
     },
-    userDecisionTimeout: 5000,
+    userDecisionTimeout: 10000,
 })(SignUp);

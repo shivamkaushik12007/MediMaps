@@ -5,7 +5,16 @@ import Logo from '../images/logo.svg';
 import {Link} from 'react-router-dom';
 
 class LogIn extends Component{
+    constructor(){
+        super();
+        this.state={
+            redirectToMediList:false
+        }
+    }
     render(){
+        if(this.state.redirectToMediList){
+            return <Redirect to="/mediList"/>
+        }
         return (
             <div>
                 <div className="Main Left">
@@ -15,7 +24,7 @@ class LogIn extends Component{
                 <div className="Main Right">
                     <div className="Inside">
                         <div className="Text">LogIn</div>
-                        <form>
+                        <form onSubmit={this._addUser}>
                             <div className="form">
                                 <div className="form-group">
                                     <input type="text" placeHolder="UserName" ref="userName" className="form-control"></input>
@@ -36,7 +45,30 @@ class LogIn extends Component{
             </div>
 
         )
-    }  
+    } 
+    _addUser=(event)=>{
+        event.preventDefault();
+        let user={
+            userName:this.refs.userName.value,
+            password:this.refs.password.value,
+        }
+        // fetch("",{
+        //     method: 'POST',
+        //     headers:{
+        //         'content-Type': 'application/json'
+        //     },
+        //     body:JSON.stringify(user)
+        // })
+        //     .then(res=>{
+        //         if(res.ok) return res.json
+        //     })
+        //     .then(res =>{
+        //         this.setState({redirectToMediList: true});
+        //     })
+        //     .catch(err=>{
+        //         console.log(err);
+        //     })
+    } 
 }
 
 export default LogIn;
