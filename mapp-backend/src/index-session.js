@@ -2,6 +2,7 @@ const express=require("express");
 const bodyParser=require("body-parser");
 var path=require("path");
 require('./dbConnection');
+const users=require('./routes/users');
 const session=require('express-session');
 
 var app=express();
@@ -25,3 +26,12 @@ app.use("*", (req, res, next) => {
     next();
 })
 
+app.use('/users',users);
+
+app.get("/",function(req,res){
+    res.send("MediMaps Intro Page");
+})
+
+app.listen(8080,()=>{
+    console.log("Server is listening at post 8080")
+})
