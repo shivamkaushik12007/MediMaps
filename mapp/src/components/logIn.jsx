@@ -27,10 +27,10 @@ class LogIn extends Component{
                         <form onSubmit={this._addUser}>
                             <div className="form">
                                 <div className="form-group">
-                                    <input type="text" placeHolder="UserName" ref="userName" className="form-control"></input>
+                                    <input type="text" placeholder="UserName" ref="userName" className="form-control"></input>
                                 </div>
                                 <div className="form-group">
-                                    <input type="password" placeHolder="Password" ref="password" className="form-control "></input>
+                                    <input type="password" placeholder="Password" ref="password" className="form-control "></input>
                                 </div>
                                 <button type="submit" className="btn btn-success">Submit</button>
                             </div>

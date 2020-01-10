@@ -51,7 +51,7 @@ class MediList extends Component{
             </div>
         )
     }
-    add(){
+    add=(event)=>{
         var med={
             name:this.refs.medicine.value,
             mg:this.refs.mg.value,
