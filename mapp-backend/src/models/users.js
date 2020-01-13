@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// var Float = require('mongoose-float').loadType(mongoose);
+var Float = require('mongoose-float').loadType(mongoose,30);
 
 const usersSchema = new mongoose.Schema({
     userName:{
@@ -17,12 +17,13 @@ const usersSchema = new mongoose.Schema({
     },
     eMail:{
         type:String,
+        unique:true,
         required:true
     },
     name:String,
     address:String,
-    longitude:Number,
-    latitude:Number
+    longitude:Float,
+    latitude:Float
 })
 
 const UsersModel = mongoose.model("Users", usersSchema, "userss");
@@ -41,11 +42,5 @@ UsersModel.addUser = function (req, callBack) {
     let user = req.body;
     UsersModel.create(user, callBack);
 }
-
-// UsersModel.updateUsers = function (req, callBack) {
-//     let query = { _id: req.body._id };
-//     let user = req.body;
-//     UsersModel.updateOne(query, user, callBack);
-// }
 
 module.exports = UsersModel;

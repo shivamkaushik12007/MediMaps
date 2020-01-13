@@ -20,6 +20,7 @@ router.post('/add', (req, res) => {
         }
         if (response) {
             req.session.userName = response.userName
+            req.session.id = response._id
             console.log("Success response is: ", JSON.stringify(response));
             res.send('User added successfully');
         }
@@ -35,6 +36,7 @@ router.post('/login', (req, res) => {
         if (response) {
             if (response.length > 1) {
                 req.session.userName = response.userName
+                req.session.id = response._id
                 console.log("Success response is: ", JSON.stringify(response));
                 res.send('User authenticated successfully');
             } else {
@@ -43,15 +45,5 @@ router.post('/login', (req, res) => {
         }
     });
 })
-
-router.put('/update', (req, res) => {
-    UsersModel.updateUsers(req, (error, response) => {
-        if (error) console.log("Error is: ", error);
-        if (response) {
-            // console.log("Success response is: ", response);
-            res.send(response);
-        }
-    });
-});
 
 module.exports = router;

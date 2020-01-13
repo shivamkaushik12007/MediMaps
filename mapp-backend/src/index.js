@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 require('./dbConnection');
 var users=require('./routes/users');
+var medicine=require('./routes/medicine');
+var search=require('./routes/search');
 const UsersModel=require('./models/users');
 const session = require('express-session');
 
@@ -25,10 +27,10 @@ var cookieValidator = (req, res, next) => {
 app.use(bodyParser.json());
 app.use(session({
     key: "mediMap",
-    secret: "mediMap"
+    secret: "mediMapSecret"
 }))
 app.use("/", express.static('static'))
-app.use("/mediList", express.static('static'))
+app.use("/home", express.static('static'))
 
 app.use("*", (req, res, next) => {
     console.log("Middleware is called");
@@ -38,8 +40,12 @@ app.use("*", (req, res, next) => {
     next();
 })
 
+app.use('/users',users);
+app.use('/medicine',cookieValidator,medicine);
+app.use('/search',search);
+
 app.get("/",function(req,res){
-    res.send("MediMaps Intro Page");
+    res.send("MediMaps Portal");
 })
 
 app.listen(8080,()=>{

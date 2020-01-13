@@ -3,6 +3,8 @@ const bodyParser=require("body-parser");
 var path=require("path");
 require('./dbConnection');
 const users=require('./routes/users');
+const medicine=require('./routes/medicine');
+const search=require('./routes/search');
 const session=require('express-session');
 
 var app=express();
@@ -27,9 +29,11 @@ app.use("*", (req, res, next) => {
 })
 
 app.use('/users',users);
+app.use('/medicine',medicine);
+app.use('/search',search);
 
 app.get("/",function(req,res){
-    res.send("MediMaps Intro Page");
+    res.send("MediMaps Portal");
 })
 
 app.listen(8080,()=>{
