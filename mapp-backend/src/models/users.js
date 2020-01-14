@@ -35,6 +35,7 @@ UsersModel.findUser = function (req, callBack) {
 
 UsersModel.findUserForLogin = function (req, callBack) {
     let user = { userName: req.body.userName, password: req.body.password };
+    JSON.stringify(user);
     UsersModel.find(user, callBack);
 }
 

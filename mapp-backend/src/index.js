@@ -3,12 +3,14 @@ const bodyParser = require("body-parser");
 require('./dbConnection');
 var users=require('./routes/users');
 var medicine=require('./routes/medicine');
-var search=require('./routes/search');
+// var search=require('./routes/search');
 const UsersModel=require('./models/users');
+// const MedicineModel=require('./models/medicine');
 const session = require('express-session');
 
 var app=express();
 var cookieValidator = (req, res, next) => {
+    console.log(req.session.userName);
     if (req.session.userName) {
         UsersModel.findUser(req, (err, res) => {
             if (err) res.status(401).send("User not authenticated");
@@ -27,10 +29,14 @@ var cookieValidator = (req, res, next) => {
 app.use(bodyParser.json());
 app.use(session({
     key: "mediMap",
-    secret: "mediMapSecret"
+    secret: "mediMapSecret",
+    resave: true,
+    saveUninitialized: true
 }))
-app.use("/", express.static('static'))
-app.use("/home", express.static('static'))
+// app.use(app.router);
+// routes.initialize(app);
+// app.use("/", express.static('static'))
+// app.use("/home", express.static('static'))
 
 app.use("*", (req, res, next) => {
     console.log("Middleware is called");
@@ -41,13 +47,13 @@ app.use("*", (req, res, next) => {
 })
 
 app.use('/users',users);
-app.use('/medicine',cookieValidator,medicine);
-app.use('/search',search);
+app.use('/medicine',medicine);
+// app.use('/search',search);
 
 app.get("/",function(req,res){
     res.send("MediMaps Portal");
 })
 
-app.listen(8080,()=>{
-    console.log("Server is listening at post 8080")
+app.listen(8081,()=>{
+    console.log("Server is listening at post 8081")
 })

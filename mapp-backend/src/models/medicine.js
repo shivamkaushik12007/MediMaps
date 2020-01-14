@@ -1,24 +1,29 @@
 const mongoose = require('mongoose');
 
-const bookSchema = new mongoose.Schema({
+const medicineSchema = new mongoose.Schema({
     name: String,
     mg:Number,
     price:Number,
-    users:String
+    users:{
+        type:String,
+        required:true
+    }
 })
 
-const MedicineModel = mongoose.model("Medicine", medicineSchema);
+const MedicineModel = mongoose.model("Medicine", medicineSchema,"medicines");
 
-BooksModel.findMedicine = function (req, callBack) {
+MedicineModel.findMedicine = function (req, callBack) {
     let id = req.session.userName;
     let query = {};
     if (id) {
         query = { users: id }
     }
+    // JSON.stringify(query);
     MedicineModel.find(query, callBack);
 }
 
 MedicineModel.addMedicine = function (req, callBack) {
+    console.log("passed ",req.body);
     let medicine = req.body;
     MedicineModel.create(medicine, callBack);
 }
@@ -28,4 +33,4 @@ MedicineModel.deleteMedicine = function (req, callBack) {
     MedicineModel.deleteOne(query, callBack);
 }
 
-module.exports = BooksModel;
+module.exports = MedicineModel;

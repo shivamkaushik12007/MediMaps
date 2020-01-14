@@ -4,7 +4,7 @@ var path=require("path");
 require('./dbConnection');
 const users=require('./routes/users');
 const medicine=require('./routes/medicine');
-const search=require('./routes/search');
+// const search=require('./routes/search');
 const session=require('express-session');
 
 var app=express();
@@ -30,12 +30,12 @@ app.use("*", (req, res, next) => {
 
 app.use('/users',users);
 app.use('/medicine',medicine);
-app.use('/search',search);
+// app.use('/search',search);
 
 app.get("/",function(req,res){
     res.send("MediMaps Portal");
 })
 
-app.listen(8080,()=>{
-    console.log("Server is listening at post 8080")
+app.listen(8081,()=>{
+    console.log("Server is listening at post 8081")
 })

@@ -33,16 +33,20 @@ router.post('/login', (req, res) => {
             console.log("Error is: ", error);
             res.send(error);
         }
-        if (response) {
-            if (response.length > 1) {
-                req.session.userName = response.userName
+        // if (response) {
+            console.log(response);
+            if (response.length > 3) {
+                req.session.userName = req.body.userName
                 req.session.id = response._id
+                console.log(req.session.userName);
+                console.log(response.userName);
+                console.log(req.body.userName);
                 console.log("Success response is: ", JSON.stringify(response));
                 res.send('User authenticated successfully');
             } else {
                 res.status(401).send('User not authenticated');
             }
-        }
+        // }
     });
 })
 
