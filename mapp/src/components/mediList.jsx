@@ -14,9 +14,9 @@ class MediList extends Component{
         }
     }
 
-    // componentDidMount(){
-    //     this.fetchMediList();
-    // }
+    componentDidMount(){
+        this.fetchMediList();
+    }
 
     render(){
         return(
@@ -42,14 +42,14 @@ class MediList extends Component{
                                 <td><input type="number" ref="price" className="Style"></input></td>
                                 <td><button className="btn btn-outline-dark mr-2" onClick={this.add}>Add</button></td>
                             </tr>
-                            {/* {this.state.MediList.map(medicine=>
+                            {this.state.mediList.map(medicine=>
                                 <tr key={medicine._id} className="ForText">
                                     <td>{medicine.name}</td>
                                     <td>{medicine.mg}</td>
                                     <td>{medicine.price}</td>
                                     <td><button className="btn btn-outline-dark mr-2" onClick={()=>this.delete(medicine)}>Delete</button></td>
                                 </tr>
-                            )} */}
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -77,16 +77,15 @@ class MediList extends Component{
                 if(res.ok) return res.json
             })
             .then(res =>{
-                // this.fetchMediList();
+                this.fetchMediList();
             })
             .catch(err=>{
                 console.log(err);
             })
     }
     delete=(medicine)=>{
-        console.log(`Book to be delete is: ${JSON.stringify(medicine)}`)
-        console.log(this);
-
+        // console.log(`Medicine to be delete is: ${JSON.stringify(medicine)}`)
+        // console.log(this);
         fetch(`http://localhost:8081/mapp/deleteMedicine?id=${medicine._id}`, {
             method: "DELETE",
             headers: {
@@ -96,7 +95,7 @@ class MediList extends Component{
             .then(res => {
                 if (res.ok) {
                     console.log(`${medicine} is deleted`);
-                    // this.fetchMediList();
+                    this.fetchMediList();
                 }
             })
             .catch(error => {
@@ -105,7 +104,13 @@ class MediList extends Component{
     }
 
     fetchMediList=()=>{
-        fetch('http://localhost:8081/medicine')
+        fetch(`http://localhost:8081/medicine?users=${this.props.location.state.userName}`,{
+            methos:"GET",
+            header:{
+                "Content-Type":"application/json"
+            }
+
+        })   
             .then(res=>{
                 return res.json()
             })

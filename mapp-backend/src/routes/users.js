@@ -16,10 +16,11 @@ router.post('/add', (req, res) => {
     UsersModel.addUser(req, (error, response) => {
         if (error) {
             console.log("Error is: ", error);
-            res.send(error);
+            // res.send(error);
+            res.status(401).send(error);
         }
         if (response) {
-            req.session.userName = response.userName
+            req.session.userName = req.body.userName
             req.session.id = response._id
             console.log("Success response is: ", JSON.stringify(response));
             res.send('User added successfully');
@@ -33,20 +34,19 @@ router.post('/login', (req, res) => {
             console.log("Error is: ", error);
             res.send(error);
         }
-        // if (response) {
-            console.log(response);
-            if (response.length > 3) {
+        if (response) {
+            // console.log(response);
+            if (response.length > 0) {
                 req.session.userName = req.body.userName
                 req.session.id = response._id
                 console.log(req.session.userName);
-                console.log(response.userName);
                 console.log(req.body.userName);
                 console.log("Success response is: ", JSON.stringify(response));
                 res.send('User authenticated successfully');
-            } else {
+            }else {
                 res.status(401).send('User not authenticated');
             }
-        // }
+        }
     });
 })
 

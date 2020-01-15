@@ -66,10 +66,10 @@ class LogIn extends Component{
             body:JSON.stringify(user)
         })
             .then(res=>{
-                if(res.ok) return res.json
-            })
-            .then(res =>{
-                this.setState({userName: this.refs.userName.value,redirectToMediList: true});
+                if(res.ok){
+                    this.setState({userName: this.refs.userName.value,redirectToMediList: true});
+                    return res.json
+                }
             })
             .catch(err=>{
                 console.log(err);

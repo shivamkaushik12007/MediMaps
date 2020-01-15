@@ -32,7 +32,7 @@ class PharmaList extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.pharmaList.Map(List=>
+                            {this.state.pharmaList.map(List=>
                                 <tr>
                                     <td className="TableData">{List.name}</td>
                                     <td className="TableData">{this.props.location.state.medicine}</td>
@@ -47,24 +47,23 @@ class PharmaList extends Component{
         )
     }
     
-    fetchPharmaList=(event)=>{
-        event.preventDefault();
-        let user={
-            search:this.props.location.state.medicine
-        }
-        fetch("http://localhost:8080/search",{
+    fetchPharmaList=()=>{
+        // event.preventDefault();
+        // let user={
+        //     search:this.props.location.state.medicine
+        // }
+        fetch(`http://localhost:8080/search?search=${this.props.location.state.medicine}`,{
             method: 'GET',
             headers:{
                 'content-Type': 'application/json'
-            },
-            body:JSON.stringify(user)
+            }
         })
             .then(res=>{
                 return res.json()
             })
             .then(res=>{
                 console.log(res);
-                this.setState({PharmaList:res});
+                this.setState({pharmaList:res});
             })
             .catch(res=>{
                 console.log(`The error is : ${JSON.stringify(res)}`)

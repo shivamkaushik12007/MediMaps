@@ -6,7 +6,7 @@ router.get('', (req, res) => {
     MedicineModel.findMedicine(req, (error, response) => {
         if (error) console.log("Error is: ", error);
         if (response) {
-            // console.log("Success response is: ", response);
+            console.log("Success response is: ", response);
             res.send(response);
         }
     });
