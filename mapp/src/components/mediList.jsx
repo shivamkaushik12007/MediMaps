@@ -4,6 +4,20 @@ import '../css/mediList.css';
 import {Link} from 'react-router-dom';
 
 class MediList extends Component{
+
+    constructor(props){
+        super(props);
+        this.componentName="MediList";
+        this.state={
+            mediList:[],
+            authenticated:false
+        }
+    }
+
+    // componentDidMount(){
+    //     this.fetchMediList();
+    // }
+
     render(){
         return(
             <div>
@@ -28,21 +42,12 @@ class MediList extends Component{
                                 <td><input type="number" ref="price" className="Style"></input></td>
                                 <td><button className="btn btn-outline-dark mr-2" onClick={this.add}>Add</button></td>
                             </tr>
-                            <tr className="ForText">
-                                <td>paracetaamole</td>
-                                <td>500</td>
-                                <td>20</td>
-                                <td><button className="btn btn-outline-dark mr-2" onClick={this.delete}>Delete</button></td>
-                            </tr>
-                            {/* {this.props.bookList.map(book =>
-                                <tr key={book.id}>
-                                    <td>{book.name}</td>
-                                    <td>{book.author}</td>
-                                    <td>{book.version}</td>
-                                    <td>
-                                        <button className="btn btn-outline-dark mr-2" onClick={() => this.sendSelectedBook(book)}><Link to='/edit'>Edit</Link></button>
-                                        <button className="btn btn-outline-dark ml-2" onClick={() => this.props.deleteBook(book)}>Delete</button>
-                                    </td>
+                            {/* {this.state.MediList.map(medicine=>
+                                <tr key={medicine._id} className="ForText">
+                                    <td>{medicine.name}</td>
+                                    <td>{medicine.mg}</td>
+                                    <td>{medicine.price}</td>
+                                    <td><button className="btn btn-outline-dark mr-2" onClick={()=>this.delete(medicine)}>Delete</button></td>
                                 </tr>
                             )} */}
                         </tbody>
@@ -52,14 +57,65 @@ class MediList extends Component{
         )
     }
     add=(event)=>{
+        event.preventDefault();
         var med={
             name:this.refs.medicine.value,
             mg:this.refs.mg.value,
-            price:this.refs.price.value
+            price:this.refs.price.value,
+            users:this.props.location.state.userName
         }
+        console.log(JSON.stringify(med));
+
+        fetch("http://localhost:8081/medicine/addMedicine",{
+            method: 'POST',
+            headers:{
+                'content-Type': 'application/json'
+            },
+            body:JSON.stringify(med)
+        })
+            .then(res=>{
+                if(res.ok) return res.json
+            })
+            .then(res =>{
+                // this.fetchMediList();
+            })
+            .catch(err=>{
+                console.log(err);
+            })
     }
-    delete(){
-        
+    delete=(medicine)=>{
+        console.log(`Book to be delete is: ${JSON.stringify(medicine)}`)
+        console.log(this);
+
+        fetch(`http://localhost:8081/mapp/deleteMedicine?id=${medicine._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => {
+                if (res.ok) {
+                    console.log(`${medicine} is deleted`);
+                    // this.fetchMediList();
+                }
+            })
+            .catch(error => {
+                console.log(`The error is: ${error}`)
+            })
+    }
+
+    fetchMediList=()=>{
+        fetch('http://localhost:8081/medicine')
+            .then(res=>{
+                return res.json()
+            })
+            .then(res=>{
+                console.log(res);
+                this.setState({mediList:res});
+            })
+            .catch(res=>{
+                console.log(`The error is : ${JSON.stringify(res)}`)
+            })
     }
 }
 

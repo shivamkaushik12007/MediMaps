@@ -8,12 +8,18 @@ class LogIn extends Component{
     constructor(){
         super();
         this.state={
+            userName:"",
             redirectToMediList:false
         }
     }
     render(){
         if(this.state.redirectToMediList){
-            return <Redirect to="/mediList"/>
+            return <Redirect to={{
+                pathname:'/mediList',
+                state:{
+                    userName:this.state.userName
+                }
+            }}/>
         }
         return (
             <div>
@@ -52,22 +58,22 @@ class LogIn extends Component{
             userName:this.refs.userName.value,
             password:this.refs.password.value,
         }
-        // fetch("",{
-        //     method: 'POST',
-        //     headers:{
-        //         'content-Type': 'application/json'
-        //     },
-        //     body:JSON.stringify(user)
-        // })
-        //     .then(res=>{
-        //         if(res.ok) return res.json
-        //     })
-        //     .then(res =>{
-        //         this.setState({redirectToMediList: true});
-        //     })
-        //     .catch(err=>{
-        //         console.log(err);
-        //     })
+        fetch("http://localhost:8081/users/login",{
+            method: 'POST',
+            headers:{
+                'content-Type': 'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+            .then(res=>{
+                if(res.ok) return res.json
+            })
+            .then(res =>{
+                this.setState({userName: this.refs.userName.value,redirectToMediList: true});
+            })
+            .catch(err=>{
+                console.log(err);
+            })
     } 
 }
 

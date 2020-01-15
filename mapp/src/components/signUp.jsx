@@ -9,7 +9,8 @@ class SignUp extends Component{
     constructor(){
         super();
         this.state={
-            redirectToListHome: false
+            userName:"",
+            redirectToMediList: false
         }
     }
     // componentDidMount(){
@@ -23,8 +24,13 @@ class SignUp extends Component{
     // }
     render(){
 
-        if(this.state.redirectToListHome){
-            return <Redirect to="/mediList"/>
+        if(this.state.redirectToMediList){
+            return <Redirect to={{
+                pathname:'/mediList',
+                state:{
+                    userName:this.state.userName
+                }
+            }}/>
         }
 
         return(
@@ -34,7 +40,7 @@ class SignUp extends Component{
                 </div>
                 <div className="InsideTwo">
                     <form onSubmit={this._addUser}>
-                        <div className="form">
+                        <div className="form" onSubmit={this._addUser}>
                             <div className="form-group">
                                 <input type="text" ref="userName" placeholder="Username" className="form-control"></input>
                             </div>
@@ -70,30 +76,30 @@ class SignUp extends Component{
         let user={
             userName:this.refs.userName.value,
             password:this.refs.password.value,
+            mobNumber:this.refs.phone.value,
+            eMail:this.refs.email.value,
             name:this.refs.name.value,
-            email:this.refs.email.value,
-            phone:this.refs.phone.value,
             address:this.refs.address.value,
             longitude:this.props.coords.longitude,
             latitude:this.props.coords.latitude
         }
-        console.log(user.longitude+'  '+user.latitude);
-        // fetch("",{
-        //     method: 'POST',
-        //     headers:{
-        //         'content-Type': 'application/json'
-        //     },
-        //     body:JSON.stringify(user)
-        // })
-        //     .then(res=>{
-        //         if(res.ok) return res.json
-        //     })
-        //     .then(res =>{
-        //         this.setState({redirectToListHome: true});
-        //     })
-        //     .catch(err=>{
-        //         console.log(err);
-        //     })
+        // console.log(user.longitude+'  '+user.latitude);
+        fetch("http://localhost:8081/users/add",{
+            method: 'POST',
+            headers:{
+                'content-Type': 'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+            .then(res=>{
+                if(res.ok) return res.json
+            })
+            .then(res =>{
+                this.setState({userName:this.refs.userName.value,redirectToMediList: true});
+            })
+            .catch(err=>{
+                console.log(err);
+            })
     }
 }
 
