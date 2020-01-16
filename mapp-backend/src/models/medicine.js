@@ -25,7 +25,7 @@ MedicineModel.addMedicine = function (req, callBack) {
 
 MedicineModel.deleteMedicine = function (req, callBack) {
     let query = { _id: req.query.id };
-    console.log(req.query.id);
+    // console.log(req.query.id);
     MedicineModel.deleteOne(query, callBack);
 }
 

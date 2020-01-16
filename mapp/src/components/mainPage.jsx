@@ -5,19 +5,19 @@ import LogIn from './logIn'
 import Home from './home'
 import PharmaList from './pharmaList'
 import MediList from './mediList'
-import { BrowserRouter as Router, Route, Switch, BrowserRouter} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 class MainPage extends Component{
-    componentDidMount(){
-        console.log("Mainpage component is mounted");
-    }
+    // componentDidMount(){
+    //     console.log("Mainpage component is mounted");
+    // }
     
     render(){
-        console.log("Mainpage component is rendered");
+        // console.log("Mainpage component is rendered");
 
         return(
             <div>
-                <BrowserRouter>
+                <Router>
                     <div>
                         <Switch>
                             <Route path="/" component={Intro} exact/>
@@ -29,22 +29,10 @@ class MainPage extends Component{
                             <Route component={Error}/>
                         </Switch>
                     </div> 
-                </BrowserRouter>
+                </Router>
             </div>
         )
     }
 }
 
 export default MainPage;
-
-
-{/* <Router>
-                    <Intro />
-                    <div>
-                        <Switch>
-                            <Route exact path="/home" render={(props)=><Home />} />
-                            <Route exact path="/logIn" render={(props)=><LogIn />} />
-                            <Route exact path="/signUp" render={(props)=><SignUp />} />
-                        </Switch>
-                    </div>
-</Router> */}

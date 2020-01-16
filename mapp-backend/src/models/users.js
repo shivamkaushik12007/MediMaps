@@ -29,7 +29,6 @@ const usersSchema = new mongoose.Schema({
 const UsersModel = mongoose.model("Users", usersSchema, "userss");
 
 UsersModel.findUser = function (req, callBack) {
-
     UsersModel.find({ userName: req.session.userName }, callBack);
 }
 

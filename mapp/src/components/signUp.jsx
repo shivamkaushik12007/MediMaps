@@ -13,9 +13,6 @@ class SignUp extends Component{
             redirectToMediList: false
         }
     }
-    // componentDidMount(){
-    //     console.log(this.props.coords.longitude)
-    // }
     // async componentDidMount(){
     //     const response=await fetch("https://api.ipgeolocation.io/ipgeo?apiKey=b03590ce4cee4f55a4a020c91b36b151");
     //     const data=await response.json();

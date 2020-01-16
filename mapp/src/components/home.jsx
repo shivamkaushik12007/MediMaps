@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import '../css/home.css'
 import Logo from '../images/logo.svg';
 import { geolocated } from "react-geolocated";
+import disableBrowserBackButton from 'disable-browser-back-navigation';
+
 class Home extends Component{
     constructor(){
         super();
@@ -13,6 +15,9 @@ class Home extends Component{
             long:null,
             lat:null
         }
+    }
+    componentDidMount(){
+        disableBrowserBackButton();
     }
     render(){
         if(this.state.redirectToPharmalist){
@@ -33,7 +38,7 @@ class Home extends Component{
                     <Link to="/logIn">logIn</Link>
                 </div>
                 <div className="LogoDivThree">
-                    <img src={Logo} className="LogoThree"/>
+                    <img src={Logo} alt="logo" className="LogoThree"/>
                 </div>
                 <div>
                     <form onSubmit={this._pharama}>

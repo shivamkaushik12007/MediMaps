@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import Logo from '../images/logo.svg';
 import '../css/mediList.css';
-import {Link} from 'react-router-dom';
+import {Redirect,Link} from 'react-router-dom';
 
 class MediList extends Component{
-
     constructor(props){
         super(props);
         this.componentName="MediList";
         this.state={
             mediList:[],
-            authenticated:false
+            authenticated:true
         }
     }
 
@@ -19,11 +18,14 @@ class MediList extends Component{
     }
 
     render(){
+        if(!this.state.authenticated){
+            return <Redirect to={{pathname:'/home'}}/>
+        }
         return(
             <div>
                 <div>
                     <div className="Bar"><img src={Logo} alt="logo" className="LogoList"/></div>
-                    <div className="Bar Log"><Link to='/home'>LogOut</Link></div>
+                    <div className="Bar Log"><Link onClick={()=>{this.setState({authenticated:false})}}>LogOut</Link></div>
                 </div>
                 <div className="ColoumnOne">
                     <table className="table table-bordered">
@@ -64,7 +66,7 @@ class MediList extends Component{
             price:this.refs.price.value,
             users:this.props.location.state.userName
         }
-        console.log(JSON.stringify(med));
+        // console.log(JSON.stringify(med));
 
         fetch("http://localhost:8081/medicine/addMedicine",{
             method: 'POST',
@@ -86,7 +88,7 @@ class MediList extends Component{
     delete=(medicine)=>{
         // console.log(`Medicine to be delete is: ${JSON.stringify(medicine)}`)
         // console.log(this);
-        fetch(`http://localhost:8081/mapp/deleteMedicine?id=${medicine._id}`, {
+        fetch(`http://localhost:8081/medicine/deleteMedicine?id=${medicine._id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -95,8 +97,11 @@ class MediList extends Component{
             .then(res => {
                 if (res.ok) {
                     console.log(`${medicine} is deleted`);
-                    this.fetchMediList();
+                    return res.json
                 }
+            })
+            .then(res=>{
+                this.fetchMediList();
             })
             .catch(error => {
                 console.log(`The error is: ${error}`)
@@ -115,7 +120,7 @@ class MediList extends Component{
                 return res.json()
             })
             .then(res=>{
-                console.log(res);
+                // console.log(res);
                 this.setState({mediList:res});
             })
             .catch(res=>{

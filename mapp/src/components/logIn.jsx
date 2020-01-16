@@ -24,7 +24,7 @@ class LogIn extends Component{
         return (
             <div>
                 <div className="Main Left">
-                    <div><Link to='/home'><img src={Logo} className="Logo"/></Link></div>
+                    <div><Link to='/home'><img src={Logo} alt="logo" className="Logo"/></Link></div>
                     <div><h1 className="Head">Welcome to the MediMaps <br/>Pharmacist Area...</h1></div>
                 </div>
                 <div className="Main Right">
