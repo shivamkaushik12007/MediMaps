@@ -12,6 +12,16 @@ router.get('', (req, res) => {
     });
 });
 
+router.get('/findSearch',(req,res)=>{
+    MedicineModel.findSearch(req,(error,response)=>{
+        if (error) console.log("Error is: ", error);
+        if (response) {
+            // console.log("Success response is: ", response);
+            res.send(response);
+        }
+    })
+})
+
 router.post('/addMedicine', (req, res) => {
     MedicineModel.addMedicine(req, (error, response) => {
         if (error) console.log("Error is: ", error);

@@ -3,28 +3,10 @@ const bodyParser = require("body-parser");
 require('./dbConnection');
 var users=require('./routes/users');
 var medicine=require('./routes/medicine');
-// var search=require('./routes/search');
 const UsersModel=require('./models/users');
-// const MedicineModel=require('./models/medicine');
 const session = require('express-session');
 
 var app=express();
-var cookieValidator = (req, res, next) => {
-    console.log(req.session.userName);
-    if (req.session.userName) {
-        UsersModel.findUser(req, (err, res) => {
-            if (err) res.status(401).send("User not authenticated");
-            if (res && res.length == 0) {
-                res.status(401).send("User not authenticated");
-            }
-            if (res && res.length > 0) {
-                next();
-            }
-        })
-    } else {
-        res.status(401).send("User not authenticated");
-    }
-}
 
 app.use(bodyParser.json());
 app.use(session({
@@ -33,13 +15,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
-// app.use(app.router);
-// routes.initialize(app);
-// app.use("/", express.static('static'))
-// app.use("/home", express.static('static'))
 
 app.use("*", (req, res, next) => {
-    console.log("Middleware is called");
+    // console.log("Middleware is called");
     res.setHeader('Access-Control-Allow-Origin', "*")
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     res.setHeader("Access-Control-Allow-Methods", "*")
@@ -48,7 +26,6 @@ app.use("*", (req, res, next) => {
 
 app.use('/users',users);
 app.use('/medicine',medicine);
-// app.use('/search',search);
 
 app.get("/",function(req,res){
     res.send("MediMaps Portal");

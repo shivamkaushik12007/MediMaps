@@ -2,15 +2,14 @@ const express = require('express');
 const router = express.Router();
 const UsersModel = require('./../models/users');
 
-router.get('', (req, res) => {
-    UsersModel.findUsers(req, (error, response) => {
-        if (error) console.log("Error is: ", error);
-        if (response) {
-            // console.log("Success response is: ", response);
+router.get('/findSearch',(req,res)=>{
+    UsersModel.findSearch(req,(error,response)=>{
+        if(error) console.log("Error is: ",error);
+        if(response){
             res.send(response);
         }
-    });
-});
+    })
+})
 
 router.post('/add', (req, res) => {
     UsersModel.addUser(req, (error, response) => {

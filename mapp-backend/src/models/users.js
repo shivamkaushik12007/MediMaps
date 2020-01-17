@@ -28,10 +28,6 @@ const usersSchema = new mongoose.Schema({
 
 const UsersModel = mongoose.model("Users", usersSchema, "userss");
 
-UsersModel.findUser = function (req, callBack) {
-    UsersModel.find({ userName: req.session.userName }, callBack);
-}
-
 UsersModel.findUserForLogin = function (req, callBack) {
     let user = { userName: req.body.userName, password: req.body.password };
     JSON.stringify(user);
@@ -41,6 +37,12 @@ UsersModel.findUserForLogin = function (req, callBack) {
 UsersModel.addUser = function (req, callBack) {
     let user = req.body;
     UsersModel.create(user, callBack);
+}
+
+UsersModel.findSearch=function(req,callBack){
+    let user={userName:req.query.search};
+    JSON.stringify(user);
+    UsersModel.find(user).select({password:0}).exec(callBack);
 }
 
 module.exports = UsersModel;
