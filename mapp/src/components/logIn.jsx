@@ -9,7 +9,9 @@ class LogIn extends Component{
         super();
         this.state={
             userName:"",
-            redirectToMediList:false
+            redirectToMediList:false,
+            checkres:false,
+            selectedOption:""
         }
     }
     render(){
@@ -37,6 +39,9 @@ class LogIn extends Component{
                                 </div>
                                 <div className="form-group">
                                     <input type="password" placeholder="Password" ref="password" className="form-control "></input>
+                                </div>
+                                <div>
+                                    {this.state.checkres?(<p className="Error">check username or password!</p>):(<p></p>)}
                                 </div>
                                 <button type="submit" className="btn btn-success">Submit</button>
                             </div>
@@ -70,6 +75,9 @@ class LogIn extends Component{
                     this.setState({userName: this.refs.userName.value,redirectToMediList: true});
                     return res.json
                 }
+            })
+            .then(res=>{
+                this.setState({checkres:true})
             })
             .catch(err=>{
                 console.log(err);

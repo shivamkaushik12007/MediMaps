@@ -24,6 +24,7 @@ class PharmaList extends Component{
                    <Link to='/home'><img src={Logo} alt="logo" className="LogoList"/></Link>
                 </div>
                 <div className="TableDiv">
+                    {this.state.pharmaList.length===0?(<h1 className="Sorry">Sorry...We don't have anyone with this medicine!</h1>):
                 <table className="table table-bordered">
                         <thead>
                             <tr>
@@ -45,7 +46,7 @@ class PharmaList extends Component{
                                 </tr>
                             )}
                         </tbody>
-                    </table>
+                    </table>}
                 </div>
             </div>
         )
@@ -64,7 +65,7 @@ class PharmaList extends Component{
             .then(res=>{
                 // console.log(res);
                 this.setState({mediList:res});
-                this.state.mediList.map(medi=>{
+                this.state.mediList.forEach(medi=>{
                     this.getUserList(medi.users,medi.price,medi._id);
                 })
                 // this.setState({mediList:res});
@@ -93,8 +94,12 @@ class PharmaList extends Component{
                     key:unq
                 }
                 a.push(k);
-                if(this.distance(res.latitude,res.longitude,
-                    this.props.location.state.latitude,this.props.location.state.longitude)<30){
+                // console.log(res[0].latitude);
+                // console.log(res[0].longitude);
+                // console.log(this.props.location.state.latitude);
+                // console.log(this.props.location.state.longitude);
+                if(this.distance(res[0].latitude,res[0].longitude,
+                    this.props.location.state.latitude,this.props.location.state.longitude)<10){
                         this.setState({pharmaList:a});
                     }
                 
@@ -114,6 +119,7 @@ class PharmaList extends Component{
             Math.sin(dLon/2) * Math.sin(dLon/2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         var d = R * c;
+        // console.log(d);
         return Math.round(d);
     }
 

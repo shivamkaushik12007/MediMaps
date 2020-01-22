@@ -25,7 +25,8 @@ class SignUp extends Component{
             return <Redirect to={{
                 pathname:'/mediList',
                 state:{
-                    userName:this.state.userName
+                    userName:this.state.userName,
+                    check:false
                 }
             }}/>
         }
@@ -55,6 +56,9 @@ class SignUp extends Component{
                             </div>
                             <div className="form-group">
                                 <input type="text" ref="address" placeholder="Address" className="form-control"></input>
+                            </div>
+                            <div>
+                                {this.state.check?(<p className="Error">This username or E-mail maybe already taken!</p>):(<p></p>)}
                             </div>
                             <button type="submit" className="btn btn-success">SignUp</button>
                         </div>
@@ -95,8 +99,12 @@ class SignUp extends Component{
                 }
                     
             })
+            .then(res=>{
+                this.setState({check:true});
+            })
             .catch(err=>{
-                console.log(err);
+                this.setState({check:true});
+                // console.log(err);
             })
     }
 }

@@ -25,7 +25,7 @@ class MediList extends Component{
             <div>
                 <div>
                     <div className="Bar"><img src={Logo} alt="logo" className="LogoList"/></div>
-                    <div className="Bar Log"><Link onClick={()=>{this.setState({authenticated:false})}}>LogOut</Link></div>
+                    <div className="Bar Log"><Link onClick={()=>{this.setState({authenticated:false})}} to='/home'>LogOut</Link></div>
                 </div>
                 <div className="ColoumnOne">
                     <table className="table table-bordered">
