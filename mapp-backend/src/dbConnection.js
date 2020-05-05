@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 mongoose.set('useCreateIndex', true);
 
-mongoose.connection.openUri('mongodb+srv://mapp:<password>@cluster0-xq5iu.mongodb.net/test?retryWrites=true&w=majority',{
+mongoose.connection.openUri('connection url',{
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
